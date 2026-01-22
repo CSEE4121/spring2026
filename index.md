@@ -9,7 +9,7 @@ menu: main
 
 CSEE4121 - Computer Systems for Data Science 
 {: style="color:black; font-size: 190%; font-weight:700; text-align: center; padding-top: 15px;"}
-Spring '25, Columbia University
+Spring '26, Columbia University
 {: style="color:black; font-size: 130%; text-align: center; padding-bottom: 30px;"}
 
 ----
@@ -43,25 +43,25 @@ The class will be split into two sections, which will have identical content, an
 
 
 ## Instructor
-Asaf Cidon
+[Waqar Aqeel](https://waqaraqeel.github.io)
 
 ## TAs
 
-[Office Hour Calendar](https://calendar.google.com/calendar/u/0/embed?src=c_cd34b309dbe3126f513b87e9c29d50873242a639550137021c720fcf3909c267@group.calendar.google.com&ctz=America/New_York)
-
 <ul>
-  <li>Yuhong Zhong (Head TA): yz@cs.columbia.edu</li>
-  <li>Triyasha Ghosh Dastidar: tg2936@columbia.edu</li>
-  <li>Vahab Jabrayilov: vj2267@columbia.edu</li>
-  <li>Hans Shen: ys3524@columbia.edu</li>
-  <li>Harry Wang: hw2886@columbia.edu</li>
-  <li>Tal Zussman: tz2294@columbia.edu</li>
+  <li>Krishen Jagani (Head TA): kcj2128@columbia.edu</li>
+  <li>Anouksha Rajesh: ar4829@columbia.edu</li>
+  <li>Anisha Gupta: ag5213@columbia.edu</li>
+  <li>Vaishnavi Kannan: vk2580@columbia.edu</li>
+  <li>Sushmita Korishetty: sk5670@columbia.edu</li>
+  <li>Arya Shidore: as7870@columbia.edu</li>
 </ul>
 {: .text-justify}
 
+See [course calendar](https://calendar.google.com/calendar/u/0?cid=Y184ZmU2NjExYjdmMmViMTEwZjQ0OGQwNDVmNmUxMDVhM2M0YjI0ZWI0NDM2NWNkNDVhZDBjYzBjNmIyZmVlNTA3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) for office hour schedule.
+
 ## Ed
 
-[Link](https://edstem.org/us/courses/74149/discussion)
+[Link](https://edstem.org/us/courses/94225/discussion)
 
 ## Prerequisites
 
@@ -70,21 +70,19 @@ data scientists who do not necessarily have a background in databases, operating
 systems or distributed systems.
 
 ## Time
-Section 1: Thursdays 10:10 AM – 12:40 PM<br />
-Section 2: Thursdays 1:10 PM – 3:40 PM
+Wednesdays 04:10 PM – 06:40 PM
 
-## Final Exam
-Date: Friday, May 2, 2025<br />
-Time: 10:10 AM – 12:10 PM<br />
-Location: International Affairs Building, IAB 417 - Altschul
+## Exams
+Midterm: March 4th, 2026, 4:10 PM - 6:40 PM <br />
+Final: April 29th, 2026, 4:10 PM - 6:40 PM
 
 ## Grade Breakdown
 5% Programming Homework 1 (SQL) <br />
 5% Written Homework 1 <br />
 10% Programming Homework 2 (indexing and filtering data structures) <br />
 5% Written Homework 2 <br />
-20% "Take Home" Midterm <br />
-55% In Person Final
+25% In Person Midterm <br />
+50% In Person Final
 
 ## Strict Late Submission Policy
 There will be no late submissions. Late submissions will receive a grade of 0.
@@ -96,9 +94,10 @@ All assignments will be done individually. We will enforce this policy when
 checking the assignments (we use a code similarity system).
 
 ## Course Materials
-No textbook.
+No textbook. Slides and assignments to be uploaded here.
 
 ## Schedule (this is a work in progress, and is likely to change)
+[Course Calendar](https://calendar.google.com/calendar/u/0?cid=Y184ZmU2NjExYjdmMmViMTEwZjQ0OGQwNDVmNmUxMDVhM2M0YjI0ZWI0NDM2NWNkNDVhZDBjYzBjNmIyZmVlNTA3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
 <table>
 <colgroup>
 <col width="33%" />
@@ -115,42 +114,42 @@ No textbook.
 <tbody>
 <tr>
 <td markdown="span">1</td>
-<td markdown="span">Introduction (1/23, [Slides]({{ site.baseurl }}{%link lectures/lecture1.pdf %}))</td>
+<td markdown="span">Introduction</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">2</td>
-<td markdown="span">Infrastructure for Big Data (1/30)</td>
+<td markdown="span">Infrastructure for Big Data</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">3</td>
-<td markdown="span">Relational Data Model (2/6)</td>
-<th markdown="1">[Programming Homework 1 out (2/3)](https://csee4121.github.io/spring2025/assignments/prog_hw1/prog_hw1)</th>
+<td markdown="span">Relational Data Model</td>
+<th markdown="1">Homework 1 out</th>
 </tr>
 <tr>
 <td markdown="span">4</td>
-<td markdown="span">Transactions and Logging (2/13)</td>
+<td markdown="span">Transactions and Logging</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">5</td>
-<td markdown="span">Storage/memory hierarchy (2/20)</td>
-<th>Written homework 1 out</th>
+<td markdown="span">Storage/memory hierarchy</td>
+<th>Homework 2 out</th>
 </tr>
 <tr>
 <td markdown="span">6</td>
-<td markdown="span"> Indexing (2/27)</td>
-<th></th>
+<td markdown="span"> Indexing</td>
+<th>Homework 1 due</th>
 </tr>
 <tr>
 <td markdown="span">7</td>
 <td markdown="span">Midterm</td>
-<th>Written homework 1 due (3/3, 4:59:59 PM), Programming HW 1 due (3/6, 4:59:59 PM)</th>
+<th>Homework 2 due</th>
 </tr>
 <tr>
 <td markdown="span">8</td>
-<td markdown="span">Challenges in Scaling (3/13)</td>
+<td markdown="span">Challenges in Scaling</td>
 <th></th>
 </tr>
 <tr>
@@ -160,33 +159,33 @@ No textbook.
 </tr>
 <tr>
 <td markdown="span">10</td>
-<td markdown="span">Analytics (3/27)</td>
-<th markdown="1">[Programming HW 2 out](https://csee4121.github.io/spring2025/assignments/prog_hw2/prog_hw2)</th>
+<td markdown="span">Analytics</td>
+<th markdown="1">Homework 3 out</th>
 </tr>
 <tr>
 <td markdown="span">11</td>
-<td markdown="span">ML Single Node (4/3)</td>
-<th> Written HW 2 out</th>
+<td markdown="span">ML Single Node</td>
+<th> Homework 4 out</th>
 </tr>
 <tr>
 <td markdown="span">12</td>
-<td markdown="span">Distributed ML (4/10)</td>
+<td markdown="span">Distributed ML</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">13</td>
-<td markdown="span">Security and Privacy (4/17)</td>
+<td markdown="span">Security and Privacy</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">14</td>
-<td markdown="span">Guest Lecture: Junaid Ahmed, VP Engineering, Observability, DataDog. Friday 2:30 PM for both sections, in person (Chandler 402) + live on Zoom + recorded (4/25); No regular lecture on Thursday</td>
-<th> Programming HW 2 due (4/25, 5:59:59PM)</th>
+<td markdown="span">Guest Lecture</td>
+<th> Homework 3 due</th>
 </tr>
 <tr>
 <td markdown="span">15</td>
-<td markdown="span">Final Exam (5/2, 10:10 AM – 12:40 PM)</td>
-<th>Written HW 2 due (4/30, 1:59:59PM)</th>
+<td markdown="span">Final Exam</td>
+<th>Homework 4 due</th>
 </tr>
 <tr>
 

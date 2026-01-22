@@ -1,6 +1,6 @@
-# CSEE 4121 Spring 2025
+# CSEE 4121 Spring 2026
 
-Course website for Spring 2025.
+Course website for Spring 2026.
 
 Built following [this guide][Github-Jekyll].
 
