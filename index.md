@@ -114,7 +114,7 @@ No textbook. Slides and assignments to be uploaded here.
 <tbody>
 <tr>
 <td markdown="span">1</td>
-<td markdown="span">Introduction</td>
+<td markdown="span">Introduction ([Slides]({{ site.baseurl }}{%link slides/lecture-1.pdf %}))</td>
 <th></th>
 </tr>
 <tr>
