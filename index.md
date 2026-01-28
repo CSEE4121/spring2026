@@ -98,6 +98,9 @@ No textbook. Slides and assignments to be uploaded here.
 
 ## Schedule (this is a work in progress, and is likely to change)
 [Course Calendar](https://calendar.google.com/calendar/u/0?cid=Y184ZmU2NjExYjdmMmViMTEwZjQ0OGQwNDVmNmUxMDVhM2M0YjI0ZWI0NDM2NWNkNDVhZDBjYzBjNmIyZmVlNTA3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
+
+[Lecture stream](https://columbiauniversity.zoom.us/j/96712352949?pwd=CggdFM0cvZbXabR69m6d1yaZ5zUm4s.1)
+
 <table>
 <colgroup>
 <col width="33%" />
