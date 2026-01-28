@@ -122,7 +122,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">2</td>
-<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-1.pdf %}))</td>
+<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-2.pdf %}))</td>
 <th></th>
 </tr>
 <tr>
