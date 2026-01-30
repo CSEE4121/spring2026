@@ -122,7 +122,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">2</td>
-<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-2.pdf %}))</td>
+<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-2.pdf %})) ([Video](https://columbiauniversity.zoom.us/rec/share/jWy1l1Zr_ZJNYKOERpSJlWspsvMa4Z1lrTADLiN8hFYrkRb1k_bf0iKsND-wdMQC.a6dduMuWOywsJK3z))</td>
 <th></th>
 </tr>
 <tr>
