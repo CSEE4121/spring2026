@@ -127,7 +127,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">3</td>
-<td markdown="span">Relational Data Model</td>
+<td markdown="span">Relational Data Model ([Demo](https://github.com/CSEE4121/sql-demo))</td>
 <th markdown="1">[Homework 1 out]({{ site.baseurl }}{%link hw1.md %})</th>
 </tr>
 <tr>
