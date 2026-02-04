@@ -128,7 +128,7 @@ No textbook. Slides and assignments to be uploaded here.
 <tr>
 <td markdown="span">3</td>
 <td markdown="span">Relational Data Model</td>
-<th markdown="1">Homework 1 out</th>
+<th markdown="1">[Homework 1 out]({{ site.baseurl }}{%link hw1.md %})</th>
 </tr>
 <tr>
 <td markdown="span">4</td>
