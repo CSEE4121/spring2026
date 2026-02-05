@@ -122,12 +122,12 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">2</td>
-<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-2.pdf %})) ([Video](https://columbiauniversity.zoom.us/rec/share/jWy1l1Zr_ZJNYKOERpSJlWspsvMa4Z1lrTADLiN8hFYrkRb1k_bf0iKsND-wdMQC.a6dduMuWOywsJK3z))</td>
+<td markdown="span">Infrastructure for Big Data ([Slides]({{ site.baseurl }}{%link slides/lecture-2.pdf %}), [Video](https://columbiauniversity.zoom.us/rec/share/jWy1l1Zr_ZJNYKOERpSJlWspsvMa4Z1lrTADLiN8hFYrkRb1k_bf0iKsND-wdMQC.a6dduMuWOywsJK3z))</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">3</td>
-<td markdown="span">Relational Data Model ([Demo](https://github.com/CSEE4121/sql-demo))</td>
+<td markdown="span">Relational Data Model ([Slides]({{ site.baseurl }}{%link slides/lecture-3.pdf %}), [Demo](https://github.com/CSEE4121/sql-demo), [Video](https://columbiauniversity.zoom.us/rec/play/PFwD85-9ZZrJWjfAMrSFTliyRYiVuGcCtvAFQIatuFrSzCaw1Qn66Zt7NJQ3_ip-NCZ-gnMkOa4InxKV.-qJCoswzHfqNdDsn))</td>
 <th markdown="1">[Homework 1 out]({{ site.baseurl }}{%link hw1.md %})</th>
 </tr>
 <tr>
