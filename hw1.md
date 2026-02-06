@@ -22,12 +22,12 @@ your account so that you can query the Github dataset.
 
 1. Make sure you have followed the [instructions](http://www.cs.columbia.edu/crf/cloud-cs/) provided by CRF to redeem your credits in Google Cloud.
 
-2. Click this [link](https://console.cloud.google.com/projectselector2/home/dashboard). You’ll see the page below; click “Create Project” to make a GCP (Google Cloud
+1. Click this [link](https://console.cloud.google.com/projectselector2/home/dashboard). You’ll see the page below; click “Create Project” to make a GCP (Google Cloud
    Platform) project.
 
    ![create project](./assets/images/createProject.png)
 
-3. Fill in the information to make a new project. Make sure to select the new
+1. Fill in the information to make a new project. Make sure to select the new
    billing account you set up after redeeming the class GCP credits.
 
    ![Fill Info](./assets/images/fillProjectInfo.jpeg)
@@ -37,7 +37,7 @@ your account so that you can query the Github dataset.
    to change the billing account for your project to the billing account created
    in Step 1.
 
-4. Go to BigQuery. Make sure to select the correct project in the dropdown menu on the top left.
+1. Go to BigQuery. Make sure to select the correct project in the dropdown menu on the top left.
 
    In the sidebar, you should see a search menu. Search for the `github_repos` dataset, pressing Enter, clicking "Search all projects", and pressing Enter again. Then you should be able to find the `github_repos` dataset. 
 
@@ -45,7 +45,7 @@ your account so that you can query the Github dataset.
 
    ![dataset](./assets/images/dataset.png)
 
-5. Click on and expand the dataset. You should see 9 tables in the sidebar.
+1. Click on and expand the dataset. You should see 9 tables in the sidebar.
    Click on each table -- you should see the schema and descriptions of each
    table. 
 
@@ -60,12 +60,12 @@ your account so that you can query the Github dataset.
    and think about which tables and columns are necessary in order to answer the
    questions. This is how real world data querying and analysis works!
 
-6. Once you've selected a table, click on the `QUERY` dropdown menu and select
+1. Once you've selected a table, click on the `QUERY` dropdown menu and select
    `In new tab` to start a query on a table.
 
    ![query table](./assets/images/query_table.png)
 
-7. Once you type in your query, you should notice that the green validator on
+1. Once you type in your query, you should notice that the green validator on
    the top right corner of the editor. This estimates how much data will be
    processed when the query is run.
 
@@ -75,12 +75,12 @@ your account so that you can query the Github dataset.
 
    ![validator](./assets/images/query_green_tick.png)
 
-8. In declarative languages, it’s easier to build up the query piece-by-piece.
+1. In declarative languages, it’s easier to build up the query piece-by-piece.
    Start with a basic outline of what you’re looking for (for example, write a
    broad condition, or do a join). Then, add complexity to your query one bit at
    a time. It’s much easier to debug this way as well.
 
-9. BigQuery can auto-format your SQL queries with <kbd>Ctrl-Shift-F</kbd> on
+1. BigQuery can auto-format your SQL queries with <kbd>Ctrl-Shift-F</kbd> on
    Windows or <kbd>Cmd-Shift-F</kbd> on macOS (You may need to do some editing
    for it to take effect). This is a good way to learn about conventional SQL
    style guidelines and will also make your queries more readable, which we
@@ -142,13 +142,13 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :---: |
    |      |       |
 
-2. (1 point) List the top 10 licenses with the most associated repos, in descending order by count.
+1. (1 point) List the top 10 licenses with the most associated repos, in descending order by count.
 
    | license | count |
    | :-----: | :---: |
    |         |       |
 
-3. (2 points) You might have noticed that some licenses belong to the same family (e.g., `gpl-2.0` and `gpl-3.0`). List the license families along with the number of associated repos, in descending order by count.
+1. (2 points) You might have noticed that some licenses belong to the same family (e.g., `gpl-2.0` and `gpl-3.0`). List the license families along with the number of associated repos, in descending order by count.
 
    We categorize the family of a license as follows. If the license contains:
 
@@ -166,7 +166,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :----: | :---: |
    |        |       |
 
-4. (1 point) We now focus on the programming languages used in Github repos. List the names of the top 10 languages used by most repos, in descending order by count. 
+1. (1 point) We now focus on the programming languages used in Github repos. List the names of the top 10 languages used by most repos, in descending order by count. 
 
    As a repo might use multiple languages, count a repo for each language it uses.
 
@@ -176,7 +176,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :---: |
    |      |       |
 
-5. (2 points) We can calculate how much a programming language is used in a repo by dividing the number of bytes used in this language by the total number of bytes used across all languages. List the name of each programming language along with the number of repos where it accounts for at least 50% of the total usage, in descending order by the repo count.
+1. (2 points) We can calculate how much a programming language is used in a repo by dividing the number of bytes used in this language by the total number of bytes used across all languages. List the name of each programming language along with the number of repos where it accounts for at least 50% of the total usage, in descending order by the repo count.
 
    Order by the repo count (descending), and then by language name (descending).
 
@@ -188,7 +188,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :---: |
    |      |       |
 
-6. (2 points) What is the most popular repo that uses a given programming language?
+1. (2 points) What is the most popular repo that uses a given programming language?
 
    List the name of each language along with the repo that has the higest watch count among the repos using this language, in descending order of the language name.
 
@@ -201,7 +201,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    |      |           |
 
 
-7. (2 points) Which programming languages are most common among the popular repos?
+1. (2 points) Which programming languages are most common among the popular repos?
 
    Among the top 100 repos with highest watch counts, list the name of each programming language used in these 100 repos and its occurance among these 100 repos, in descending order of the occurance. 
 
@@ -213,7 +213,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :-------: |
    |      |           |
 
-8. (2 points) List the name of each programming language with the repo_name of the repo that has most commits among the repos using this language.
+1. (2 points) List the name of each programming language with the repo_name of the repo that has most commits among the repos using this language.
 
    Order by the commit count of the repo with most commits (descending), and then by language name (descending).
 
@@ -223,7 +223,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :-------: |
    |      |           |
 
-9. (1 point) How does the number of commits change over time?
+1. (1 point) How does the number of commits change over time?
 
    List the number of commits that were committed in each year, sorted in descending order by year. Use the committer's date as the time a commit is considered committed.
 
@@ -233,7 +233,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    | :--: | :---: |
    |      |       |
 
-10. (1 point) Which weekday had the most commits committed? 
+1. (1 point) Which weekday had the most commits committed? 
 
    List the day (using numbers 1-7) along with the total number of commits given that day. Use the committer's date as the time a commit is considered committed.
 
@@ -247,18 +247,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
 
    It’s not surprising that there are not many commits during weekends.
 
-<!-- 11. (2 points) What is the correlation between the number of commits and the watch count of a repo?
-
-    List all the repors along with their commit count and watch count.
-
-    Order by the number of commits (descending).
-
-    | repo_name | commit_count | watch_count |
-    | :-------: | :----------: | :---------: |
-    |           |              |             |
-    -->
-
-11. (2 points) Repositories are grouped into **commit activity buckets** based on their total number of commits:
+1. (2 points) Repositories are grouped into **commit activity buckets** based on their total number of commits:
 
    - **low**: fewer than 100 commits  
    - **medium**: 100–999 commits  
@@ -288,7 +277,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
    |:--------------:|:---------:|:------------:|
 
 
-12. (2 point) Who authored the most commits, and which repos did they contribute to the most?
+1. (2 point) Who authored the most commits, and which repos did they contribute to the most?
 
     List the top 10 authors (*not* committers) who authored most commits along with (1) the total number of commits they authored across all repos, and (2) the repo that they contributed the most.
 
@@ -300,7 +289,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
     | :---------: | :----------: | :-------: |
     |             |              |           |
 
-13. (2 point) Git allows a committer to commit on behalf of an author. For example, when you create a pull request on GitHub to contribute to an open-source project, the maintainer can commit your changes on your behalf after approving them.
+1. (2 point) Git allows a committer to commit on behalf of an author. For example, when you create a pull request on GitHub to contribute to an open-source project, the maintainer can commit your changes on your behalf after approving them.
 
     For each repo, calculate the ratio of commits where the author is the same as the committer. This ratio is obtained by dividing the number of such commits by the total number of commits in the repo (i.e., a ratio of 1 means that the author is the committer for all commits). Round the ratio to **two decimal places**.
 
@@ -314,7 +303,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
     | :-------: | :---: |
     |           |       |
 
-14. (2 points) For each repo, find the author who authored most commits, the committer who committed most commits, and the language that occupies the most bytes.
+1. (2 points) For each repo, find the author who authored most commits, the committer who committed most commits, and the language that occupies the most bytes.
 
     To simplify the problem, please use the combination of name and email as the unique identifier for authors and committers.
 
@@ -324,7 +313,7 @@ Do not edit the file manually after downloading -- it may break our autograder.
     | :-------: | :---------: | :------------: | :------: |
     |           |             |                |          |
 
-15. (2 points) For repos that use the `mit` licence and with at least `8000` watch count, find the main author who authored most commits.
+1. (2 points) For repos that use the `mit` licence and with at least `8000` watch count, find the main author who authored most commits.
 
     To simplify the problem, please use the combination of name and email as the unique identifier for authors.
 
@@ -350,10 +339,10 @@ Each student should submit one zip file to Gradescope.
    on Courseworks. In order to be properly graded, the **file must be named
    `hw1_submission.py`**.
 
-2. Rename your CSV outputs to `qN.csv`, where `N` is the question number. For
+1. Rename your CSV outputs to `qN.csv`, where `N` is the question number. For
    example, question 10 would be `q10.csv`.
 
-3. Please ensure that your directory structure is as shown below. The zip file
+1. Please ensure that your directory structure is as shown below. The zip file
    that you submit should have all the csv results as well as
    `hw1_submission.py` **at the root**. When you compress your submission,
    you should select the individual files, rather than the directory containing
