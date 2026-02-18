@@ -132,12 +132,12 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">4</td>
-<td markdown="span">Transactions and Logging ([Slides]({{ site.baseurl }}{%link slides/lecture-4.pdf %}), [Podcast]({{ site.baseurl }}{%link assets/audio/petflix-podcast.m4a %}), [Video](https://columbiauniversity.zoom.us/rec/play/GvUrIL8inC8D5io_M3mi6fz76jPWv_9ZQq5ecNz2cvYHzZV088x-FvPpgThzSizcGqEvReKArccPQgLK.jWJ3-diAzicEQda6))</td>
+<td markdown="span">Transactions, Petflix ([Slides]({{ site.baseurl }}{%link slides/lecture-4.pdf %}), [Podcast]({{ site.baseurl }}{%link assets/audio/petflix-podcast.m4a %}), [Video](https://columbiauniversity.zoom.us/rec/play/GvUrIL8inC8D5io_M3mi6fz76jPWv_9ZQq5ecNz2cvYHzZV088x-FvPpgThzSizcGqEvReKArccPQgLK.jWJ3-diAzicEQda6))</td>
 <th></th>
 </tr>
 <tr>
 <td markdown="span">5</td>
-<td markdown="span">Storage/memory hierarchy</td>
+<td markdown="span">Database techniques, Networking ([Slides]({{ site.baseurl }}{%link slides/lecture-5.pdf %}))</td>
 <th>Homework 2 out</th>
 </tr>
 <tr>
