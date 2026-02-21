@@ -138,7 +138,7 @@ No textbook. Slides and assignments to be uploaded here.
 <tr>
 <td markdown="span">5</td>
 <td markdown="span">Database techniques, Networking ([Slides]({{ site.baseurl }}{%link slides/lecture-5.pdf %}))</td>
-<th>[Homework 2 out](https://www.gradescope.com/courses/1233001/assignments/7698888)</th>
+<th markdown="1">[Homework 2 out](https://www.gradescope.com/courses/1233001/assignments/7698888)</th>
 </tr>
 <tr>
 <td markdown="span">6</td>
