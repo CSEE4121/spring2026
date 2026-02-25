@@ -142,7 +142,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">6</td>
-<td markdown="span"> Indexing</td>
+<td markdown="span">Networking, Partitioning, 2PC ([Slides]({{ site.baseurl }}{%link slides/lecture-6.pdf %}))</td>
 <th>Homework 1 due</th>
 </tr>
 <tr>
