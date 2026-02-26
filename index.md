@@ -142,7 +142,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">6</td>
-<td markdown="span">Networking, Partitioning, 2PC ([Slides]({{ site.baseurl }}{%link slides/lecture-6.pdf %}))</td>
+<td markdown="span">Networking, Partitioning, 2PC ([Slides]({{ site.baseurl }}{%link slides/lecture-6.pdf %}), [Video](https://columbiauniversity.zoom.us/rec/share/HApt8KOW37ZDMl6Wa4AX_RaLj407Ig0yCwP_55LZUJgPc7RK79k9j0sA2uObZGds.PVPUS_xQ55eL32dg))</td>
 <th>Homework 1 due</th>
 </tr>
 <tr>
