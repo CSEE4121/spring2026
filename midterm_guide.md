@@ -41,6 +41,7 @@
   - Measured in 9s (e.g., 5-9s meaning 99.999%)
 
 **Example**: Boeing 747 vs. Concorde
+
 | Plane | DC→Paris | Speed | Passengers | Throughput (pmph) |
 |-------|----------|-------|------------|-------------------|
 | Boeing 747 | 6.5 hrs | 610 mph | 470 | 286,700 |
@@ -165,6 +166,7 @@ Reliability must come from software!
 - **Schema**: Structure definition (column names, types, constraints)
 
 ### Data Types
+
 | Type | Description |
 |------|-------------|
 | INT32, INT64 | Integers (32 or 64 bit) |
@@ -175,6 +177,7 @@ Reliability must come from software!
 | BOOLEAN | True/false |
 
 ### Set vs. Multiset vs. List
+
 | Collection | Ordered? | Duplicates? |
 |------------|----------|-------------|
 | Set | No | No |
@@ -222,7 +225,6 @@ SELECT dept, AVG(salary) FROM employees WHERE AVG(salary) > 50000 GROUP BY dept;
 -- CORRECT: HAVING with aggregate
 SELECT dept, AVG(salary) FROM employees GROUP BY dept HAVING AVG(salary) > 50000;
 ```
----
 
 ### JOIN Types
 
@@ -329,6 +331,7 @@ message Person {
 - Optional fields are safely ignored by older versions
 
 ---
+
 ## 5. Indexing & Query Optimization
 
 ### What is an Index?
