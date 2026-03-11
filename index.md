@@ -152,7 +152,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">8</td>
-<td markdown="span">Challenges in Scaling</td>
+<td markdown="span">MapReduce and Spark ([Slides]({{ site.baseurl }}{%link slides/lecture-7.pdf %}))</td>
 <th></th>
 </tr>
 <tr>
