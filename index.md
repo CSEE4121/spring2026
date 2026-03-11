@@ -147,7 +147,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">7</td>
-<td markdown="span">Midterm</td>
+<td markdown="span">Midterm ([Video](https://columbiauniversity.zoom.us/rec/share/uGuCPmzZ6Uog4EcFQz8QPRscnsnqKUhhHGBnzt5z1q-18v_TNQbMACKkveae4Lmr.vHa7T3Q6EObJiLPK?startTime=1772665094000))</td>
 <th>Homework 2 due</th>
 </tr>
 <tr>
