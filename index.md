@@ -152,7 +152,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">8</td>
-<td markdown="span">MapReduce and Spark ([Slides]({{ site.baseurl }}{%link slides/lecture-7.pdf %}))</td>
+<td markdown="span">MapReduce and Spark ([Slides]({{ site.baseurl }}{%link slides/lecture-7.pdf %}), ([Video](https://columbiauniversity.zoom.us/rec/play/pftGEme851BEZ25LNoAHPsy_RakaHjAs8lIWeumjQHXiUecNhmVD1lRVA5Ug3r-PjOF55oYtDenSH5zi.ei_aUgKwGxOcbJp7)))</td>
 <th></th>
 </tr>
 <tr>
