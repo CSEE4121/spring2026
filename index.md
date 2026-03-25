@@ -162,12 +162,12 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">10</td>
-<td markdown="span">Analytics</td>
+<td markdown="span">Spark, Security and Privacy</td>
 <th markdown="1">Homework 3 out</th>
 </tr>
 <tr>
 <td markdown="span">11</td>
-<td markdown="span">ML Single Node</td>
+<td markdown="span">Security and Privacy</td>
 <th> Homework 4 out</th>
 </tr>
 <tr>
@@ -177,7 +177,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">13</td>
-<td markdown="span">Security and Privacy</td>
+<td markdown="span">Distributed ML</td>
 <th></th>
 </tr>
 <tr>
