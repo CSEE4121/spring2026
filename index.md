@@ -27,8 +27,9 @@ real-world performance, availability and scalability challenges when using and
 deploying these systems at scale. In the course we will cover foundational ideas
 in designing these systems, while focusing on specific popular systems that
 students are likely to encounter at work or when doing research. The class will
-include two written homework and two programming assignments. All of the assignments will be done
-individually. In this course we will answer the following questions:
+include two written homeworks and two programming assignments. All of the
+assignments will be done individually. In this course we will answer the
+following questions:
 <ul>
   <li>How are popular big data systems designed and architected?</li>
   <li>How to think about performance, scale and reliability of big data systems?</li>
@@ -39,7 +40,7 @@ conducting analysis on large data sets?</li>
 </ul>
 {: .text-justify}
 
-The class will be split into two sections, which will have identical content, and will be delivered by the same lecturer (Asaf Cidon) and served by the same TA team. The class will also be recorded, and there is no requirement for physical attendance.
+This class will be recorded, and there is no requirement for physical attendance.
 
 
 ## Instructor
@@ -77,10 +78,10 @@ Midterm: March 4th, 2026, 4:10 PM - 6:40 PM [Study guide]({{ site.baseurl }}{%li
 Final: April 29th, 2026, 4:10 PM - 6:40 PM
 
 ## Grade Breakdown
-5% Programming Homework 1 (SQL) <br />
-5% Written Homework 1 <br />
-10% Programming Homework 2 (indexing and filtering data structures) <br />
-5% Written Homework 2 <br />
+5% Homework 1 (Programming - SQL) <br />
+5% Homework 2 (Written) <br />
+10% Homework 3 (Programming - indexing and filtering data structures) <br />
+5% Homework 4 (Written) <br />
 25% In Person Midterm <br />
 50% In Person Final
 
@@ -172,7 +173,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">12</td>
-<td markdown="span">Distributed ML</td>
+<td markdown="span">Single node ML</td>
 <th></th>
 </tr>
 <tr>
@@ -182,7 +183,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">14</td>
-<td markdown="span">Guest Lecture</td>
+<td markdown="span">Distributed ML</td>
 <th> Homework 3 due</th>
 </tr>
 <tr>
