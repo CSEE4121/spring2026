@@ -163,7 +163,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">10</td>
-<td markdown="span">Spark, Security and Privacy</td>
+<td markdown="span">Spark, Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-8.pdf %}))</td>
 <th markdown="1">Homework 3 out</th>
 </tr>
 <tr>
