@@ -2,8 +2,8 @@
 
 Gain a hands-on understanding of Google Cloud Dataproc, Apache Spark, Spark SQL, and Spark Streaming over HDFS.
 
-Released: **March 25, 2026**  
-Due: **April 21, 2026, 4:59:59 PM**
+Released: **March 26, 2026**  
+Due: **April 14, 2026**
 
 ## Overview
 
@@ -78,8 +78,8 @@ Click on **Create cluster** in the [Dataproc console](https://console.cloud.goog
 | **Cluster name** | `hw2-spark-cluster` (or any name) |
 | **Region** | `us-east1` (must match your bucket's region) |
 | **Cluster mode** | Single Node (for debugging; switch to Standard with 2 workers for Questions 3-8) |
-| **Machine type** | `n2-standard-4` (4 vCPUs, 16 GB RAM) |
-| **Image version** | `2.0-debian10` (Spark 3.1.2, Scala 2.12) |
+| **Machine type** | `n4-standard-4` (4 vCPUs, 16 GB RAM) |
+| **Image version** | `2.1-debian11` (Spark 3.3.x) |
 
 ![Cluster Mode](./assets/images/hw3/SingleNode.jpeg)
 
@@ -88,7 +88,7 @@ Click on **Create cluster** in the [Dataproc console](https://console.cloud.goog
 1. Scroll down to **Component gateway** and select **Enable access to the web interfaces of default and selected optional components on the cluster**.
 2. Click on **Advanced options**.
 3. Under **Optional components**, click **Select component**.
-4. Choose **Jupyter Notebook** (Anaconda is pre-installed with miniconda in image 2.0; see [this](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.0) for details).
+4. Choose **Jupyter Notebook** (Anaconda is pre-installed with miniconda in image 2.1; see [this](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.1) for details).
 5. Click **Select** to save.
 
 ![Select Component](./assets/images/hw3/SelectComponentGateway.jpeg)
@@ -152,7 +152,31 @@ sudo hdfs dfs -get gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spa
 
 ---
 
-## Task 1: Getting Started (10 Points)
+## Data Setup
+
+Before starting the tasks, you must copy the Wikipedia datasets from the shared class bucket to your cluster's internal storage (HDFS). 
+
+Open a terminal on your Dataproc **master node** (or use the SSH button in the Google Cloud Console) and run the following commands:
+
+```bash
+# Copy the small debugging file
+hdfs dfs -cp gs://csee4121-s26-data/wiki-small.xml /
+
+# Copy the medium test file (for Questions 2-4)
+hdfs dfs -cp gs://csee4121-s26-data/wiki-test.xml /
+
+# Copy the large dataset (for Questions 5-8)
+hdfs dfs -cp gs://csee4121-s26-data/wiki-whole.xml /
+```
+
+You can verify the files are successfully copied by running:
+```bash
+hdfs dfs -ls /
+```
+
+---
+
+## Task 1: Getting Started (6 Points)
 
 In this task, we provide you a big Wikipedia database in XML format. It can be found at `/wiki-whole.xml` in your HDFS.
 
@@ -232,7 +256,7 @@ Refer to [this doc](https://cloud.google.com/dataproc/docs/guides/submit-job) fo
 
 ---
 
-## Task 2: Webgraph on Internal Links (50 Points)
+## Task 2: Webgraph on Internal Links (38 Points)
 
 Write a Spark program which takes the XML file as input and generates a **tab-separated CSV file** describing the webgraph of internal Wikipedia links. The output should look like:
 
@@ -348,7 +372,7 @@ Besides answering these questions, you also need to submit the code and output. 
 
 ---
 
-## Task 3: Spark PageRank (40 Points)
+## Task 3: Spark PageRank (38 Points)
 
 In this task, you are going to implement the PageRank algorithm, which Google uses to rank websites in Google Search. We will use it to calculate the rank of the articles in Wikipedia. The algorithm can be summarized as follows:
 
@@ -463,7 +487,7 @@ gsutil cp 'gs://<your-bucket-name>/task3-output/part-00000*.csv' ./task3.csv
 | `AccessDeniedException: 403` when writing to GCS | Bucket doesn't exist in your project or wrong name | Run `!gsutil ls -p <your-project-id>` to list your buckets. Use one that exists. |
 | `NameError: name 'add' is not defined` | Missing import in PageRank code | Add `from operator import add` before the PageRank loop |
 | `AnalysisException: Path does not exist` | Task 3 reading from a path Task 2 didn't write to | Make sure the read path in Task 3 matches the exact write path from Task 2 |
-| `Py4JJavaError` when reading XML | spark-xml JAR not installed | Run: `sudo hdfs dfs -get gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spark/jars/` |
+| `Py4JJavaError` when reading XML | spark-xml JAR not installed | Run: `sudo gsutil cp gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spark/jars/` |
 | Jupyter link not working | HTTPS issue | Change `https` to `http` in the URL |
 
 ---
@@ -523,7 +547,3 @@ UNI-1_UNI-2_assignment2.zip
     ├── task3.ipynb
     └── task3config.txt
 ```
-
-## Acknowledgements
-
-This assignment is based on Peifeng Yu and Mosharaf Chowdhury's UMICH EECS598: Advanced Topics on Systems for X.
