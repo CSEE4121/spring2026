@@ -163,8 +163,8 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">10</td>
-<td markdown="span">Spark, Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-8.pdf %}))</td>
-<th markdown="1">Homework 3 out</th>
+<td markdown="span">Spark, Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-8.pdf %}), [Video](https://columbiauniversity.zoom.us/rec/share/8uK2mHbV3oh3jILe1It1q2Ka3zOQZZeKIyAzqIKaoeGQOg-qgxWI3r552Xv14Lt7.WcuhiQEI9g2b64Yj?startTime=1774469702000))</td>
+<th markdown="1">[Homework 3 out](https://www.gradescope.com/courses/1233001/assignments/7881650/)</th>
 </tr>
 <tr>
 <td markdown="span">11</td>
