@@ -19,10 +19,6 @@ As a well-maintained open-source framework, Apache Spark has well-written offici
 
 When you encounter an issue regarding cluster deployment or writing Spark programs, you are encouraged to utilize online resources before posting questions on Ed.
 
-## Collaboration Policy & Submission Details
-
-You may work on this assignment individually, or in a group of 2. However, it is highly recommended that both members set up and run the code for this assignment. 1 submission is required for each group. Please follow the submission instructions provided at the end of this document carefully. There will be separate submissions for the written questions and the code.
-
 ## Learning Outcomes
 
 After completing this programming assignment, you should be able to:
@@ -146,7 +142,8 @@ sudo hdfs dfs -get gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spa
 1. Go to **Cluster details** → **Web Interfaces** tab.
 2. Click the **Jupyter** link to open the Jupyter Notebook interface.
 3. If the link doesn't work, try changing `https` to `http` in the URL.
-4. Upload your `.ipynb` notebook file.
+4. **Important**: In the Jupyter file browser, double-click the **`GCS`** folder. You cannot create files in the root directory because it is read-only.
+5. Create a new **PySpark** notebook inside the `GCS` folder, or upload `prog_hw2_starter.ipynb` from the repository.
 
 > **Important:** The notebook kernel should be **PySpark**, not Python 3. This ensures Spark is available in your session.
 
@@ -487,7 +484,7 @@ gsutil cp 'gs://<your-bucket-name>/task3-output/part-00000*.csv' ./task3.csv
 | `AccessDeniedException: 403` when writing to GCS | Bucket doesn't exist in your project or wrong name | Run `!gsutil ls -p <your-project-id>` to list your buckets. Use one that exists. |
 | `NameError: name 'add' is not defined` | Missing import in PageRank code | Add `from operator import add` before the PageRank loop |
 | `AnalysisException: Path does not exist` | Task 3 reading from a path Task 2 didn't write to | Make sure the read path in Task 3 matches the exact write path from Task 2 |
-| `Py4JJavaError` when reading XML | spark-xml JAR not installed | Run: `sudo gsutil cp gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spark/jars/` |
+| `Py4JJavaError` when reading XML | spark-xml JAR not installed | Run: `sudo hdfs dfs -get gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spark/jars/` |
 | Jupyter link not working | HTTPS issue | Change `https` to `http` in the URL |
 
 ---
@@ -497,14 +494,6 @@ gsutil cp 'gs://<your-bucket-name>/task3-output/part-00000*.csv' ./task3.csv
 * **Delete the cluster** after you are done for a coding session. Do not leave it on overnight. Otherwise, you will burn through your credits very quickly.
 * **Start with small files** and use a one node setup to debug your code. Then try to run your code on bigger files and a three-node setup.
 * It is recommended to use **Jupyter Notebook** to debug your code. Make sure you have shutdown all of your Jupyter notebooks before you submit your job using the web interface.
-
----
-
-## Submission Instructions
-
-Only one team member needs to make a submission on Gradescope, but make sure both team members are assigned to the submission.
-
-There will be 2 Gradescope submissions required for this assignment.
 
 ### 1. Written Questions 1-8
 
