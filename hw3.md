@@ -177,7 +177,7 @@ hdfs dfs -ls /
 
 In this task, we provide you a big Wikipedia database in XML format. It can be found at `/wiki-whole.xml` in your HDFS.
 
-This input file is very big (~30 GB) and you have to use a distributed file system like HDFS to handle it. We have also provided a smaller file `/wiki-small.xml` for debugging purposes.
+This input file is very big (~1 GB) and you have to use a distributed file system like HDFS to handle it. We have also provided a smaller file `/wiki-small.xml` for debugging purposes.
 
 The XML files are structured as follows:
 
