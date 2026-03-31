@@ -177,7 +177,7 @@ hdfs dfs -ls /
 
 In this task, we provide you a big Wikipedia database in XML format. It can be found at `/wiki-whole.xml` in your HDFS.
 
-This input file is very big (~30 GB) and you have to use a distributed file system like HDFS to handle it. We have also provided a smaller file `/wiki-small.xml` for debugging purposes.
+This input file is very big (~1 GB) and you have to use a distributed file system like HDFS to handle it. We have also provided a smaller file `/wiki-small.xml` for debugging purposes.
 
 The XML files are structured as follows:
 
@@ -486,6 +486,41 @@ gsutil cp 'gs://<your-bucket-name>/task3-output/part-00000*.csv' ./task3.csv
 | `AnalysisException: Path does not exist` | Task 3 reading from a path Task 2 didn't write to | Make sure the read path in Task 3 matches the exact write path from Task 2 |
 | `Py4JJavaError` when reading XML | spark-xml JAR not installed | Run: `sudo hdfs dfs -get gs://csee4121-s26-data/spark-xml_2.12-0.16.0.jar /usr/lib/spark/jars/` |
 | Jupyter link not working | HTTPS issue | Change `https` to `http` in the URL |
+| External IP Access Error | `compute.vmExternalIpAccess` organization policy | Create cluster with **Internal IP only**, enable **Private Google Access** in VPC, and use **IAP** for SSH. See details below. |
+
+### Resolving External IP Access Errors (Organization Policy)
+
+If you see an error like `Constraint constraints/compute.vmExternalIpAccess violated`, it means your Google Cloud organization blocks Virtual Machines from having public IP addresses. This is common in university projects.
+
+**Short Fix:**
+1.  **VPC Network** > Click **default** > Click your **subnet** (e.g., `us-east1`) > **Edit** > Turn **On** "Private Google Access" > **Save**.
+2.  **Recreate Cluster** > **Advanced Options** > **Network configuration** > Check **Internal IP only**.
+3.  **SSH** via the console normally (it uses IAP). If it fails, use:
+    `gcloud compute ssh <cluster-m-name> --tunnel-through-iap --zone=<zone>`
+
+**Detailed Steps:**
+
+**Step 1: Enable "Private Google Access"**
+Because your VMs won't have public internet access, they need this setting to securely download required packages (like Jupyter) internally.
+1. In the Google Cloud Console, search for **VPC network**.
+2. Click on the network named **default**.
+3. Click on the **subnet** for your region (e.g., `us-east1`).
+4. Click **Edit** at the top.
+5. Turn **On** the setting for **Private Google Access**.
+6. Click **Save**.
+
+**Step 2: Create the Cluster with "Internal IP Only"**
+1. Go to the **Dataproc > Create cluster** page.
+2. Fill out the settings as usual.
+3. Before hitting create, open **Advanced Options** at the bottom.
+4. Under **Network configuration**, check the box for **Internal IP only**.
+5. Ensure your staging bucket and Jupyter component are still selected, then click **Create**.
+
+**Accessing SSH without an External IP**
+Once successful, your nodes will only have internal IPs. The "SSH" button in the console should automatically use Google's **Identity-Aware Proxy (IAP)**. If it fails, run this in the **Cloud Shell**:
+```bash
+gcloud compute ssh <cluster-m-name> --tunnel-through-iap --zone=<zone>
+```
 
 ---
 
