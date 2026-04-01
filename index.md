@@ -168,13 +168,13 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">11</td>
-<td markdown="span">Security and Privacy</td>
-<th> Homework 4 out</th>
+<td markdown="span">Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-9.pdf %}))</td>
+<th></th>
 </tr>
 <tr>
 <td markdown="span">12</td>
 <td markdown="span">Single node ML</td>
-<th></th>
+<th> Homework 4 out</th>
 </tr>
 <tr>
 <td markdown="span">13</td>
