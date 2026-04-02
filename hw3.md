@@ -77,7 +77,7 @@ Click on **Create cluster** in the [Dataproc console](https://console.cloud.goog
 | **Machine type** | `n4-standard-4` (4 vCPUs, 16 GB RAM) |
 | **Image version** | `2.1-debian11` (Spark 3.3.x) |
 
-![Cluster Mode](./assets/images/hw3/SingleNode.jpeg)
+![Cluster Mode](./pics/SingleNode.jpeg)
 
 #### Enable Jupyter Notebook
 
@@ -87,8 +87,8 @@ Click on **Create cluster** in the [Dataproc console](https://console.cloud.goog
 4. Choose **Jupyter Notebook** (Anaconda is pre-installed with miniconda in image 2.1; see [this](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.1) for details).
 5. Click **Select** to save.
 
-![Select Component](./assets/images/hw3/SelectComponentGateway.jpeg)
-![Choose Component](./assets/images/hw3/SelectAnacondaAndJupyterNotebook.jpeg)
+![Select Component](./pics/SelectComponentGateway.jpeg)
+![Choose Component](./pics/SelectAnacondaAndJupyterNotebook.jpeg)
 
 Refer to [this doc](https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook) for more details.
 
@@ -97,7 +97,7 @@ Refer to [this doc](https://cloud.google.com/dataproc/docs/tutorials/jupyter-not
 1. In the **Advanced options** section, go to **Cloud Storage staging bucket**.
 2. Click **Browse** and select the bucket you created in Step 4.
 
-![Bucket with Dataproc](./assets/images/hw3/bucket_dataproc.jpeg)
+![Bucket with Dataproc](./pics/bucket_dataproc.jpeg)
 
 > **Note:** This step is technically optional but **highly recommended**. Dataproc will automatically save your notebooks to the linked bucket, protecting your work from cluster failures.
 
@@ -105,7 +105,7 @@ Refer to [this doc](https://cloud.google.com/dataproc/docs/tutorials/jupyter-not
 
 Components like Spark and Hadoop have many configurations that users can tune. You can change the default values when creating the cluster under **Cluster properties** in the Advanced Options section. You will need to edit cluster properties for some questions, but you can leave it alone to get started.
 
-![Cluster Property](./assets/images/hw3/ClusterProperty.jpeg)
+![Cluster Property](./pics/ClusterProperty.jpeg)
 
 Refer to [this doc](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/cluster-properties) for more details.
 
@@ -241,11 +241,11 @@ Copy the outputted schema to a **separate txt file** named `schema.txt`. (6 poin
 
 Once you are done debugging in Jupyter Notebook, you can download it as a Python (`.py`) file and submit it as a job to run on the cluster:
 
-![Submit Job](./assets/images/hw3/SubmitJob.jpeg)
+![Submit Job](./pics/SubmitJob.jpeg)
 
 The following is an example job:
 
-![Example Job](./assets/images/hw3/ExampleSubmitJob.jpeg)
+![Example Job](./pics/ExampleSubmitJob.jpeg)
 
 Notice you can specify a Python file to run from Google Cloud Storage. Also, when you need to read the XML files, make sure you have included the `.jar` file. You can also specify the number of cores and memory for driver and executor here.
 
@@ -279,8 +279,9 @@ If the remaining string becomes empty after filtering, ignore it. The two column
 
 **Hint:** It is recommended to use UDF + regular expression to extract links from the documents. Also, try to use the built-in Spark functions to sort your results.
 
-### Task 2 Code
+### Task 2 Starter Code
 
+We are providing the following complete Spark starter code to help you extract the links from the Wikipedia XML format. **Note:** Please copy and run this code exactly as provided below, even if you notice minor parsing edge cases. The autograder has been configured to expect this exact output.
 **Cell 1 — Define the link extraction function:**
 ```python
 import re
@@ -357,7 +358,7 @@ Set the **Spark driver memory** to 5GB and the **Spark executor memory** to 5GB 
 
 **Question 5.** (2 points) Use `wiki-whole.xml` as input and run the program under HDFS inside the Spark cluster you deployed. Record the completion time. Now, kill one of the worker nodes immediately. You could kill one of the worker nodes by going to the **VM Instances** tab on the Cluster details page and clicking on the name of one of the workers. Then click the STOP button. Record the completion time. Does the job still finish? Do you observe any difference in the completion time? Briefly explain your observations. Include your screenshot of the dataproc jobs.
 
-![Stop worker](./assets/images/hw3/StopVM.jpeg)
+![Stop worker](./pics/StopVM.jpeg)
 
 **Question 6.** (2 points) Only for this question, change the **replication factor** of `wiki-whole.xml` to 1 and repeat Question 5 without killing one of the worker nodes. Include your screenshot of the dataproc job. Do you observe any difference in the completion time? Briefly explain.
 
@@ -382,8 +383,9 @@ The output should be a CSV file containing two columns: the first column is the 
 
 Set the Spark driver memory to 5GB and the Spark executor memory to 5GB whenever you run your PageRank program. Write a script to first run Task 2, and then run Task 3 using the CSV output generated by Task 2. Always use **10 iterations** for the PageRank program. When running Task 2, use `wiki-whole.xml` as input.
 
-### Task 3 Code
+### Task 3 Starter Code
 
+We are also providing the following starter code to help you execute the distributed PageRank algorithm using Spark RDDs. Please use it as provided.
 > **Important:** You must import `add` from the `operator` module. Without this import, you will get `NameError: name 'add' is not defined`.
 
 **Cell 1 — Import and read Task 2 output:**
