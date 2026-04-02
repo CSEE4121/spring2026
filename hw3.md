@@ -532,7 +532,7 @@ gcloud compute ssh <cluster-m-name> --tunnel-through-iap --zone=<zone>
 
 ### 1. Written Questions 1-8
 
-This will be a Gradescope form. You will input your answers to the written questions 1-8.
+Please compile your answers to written questions 1-8 into a single PDF and upload it to Gradescope.
 Please keep your answers succinct. We may deduct points for excessively verbose answers. For theoretical questions, a maximum of 1–2 lines per answer is expected.
 
 ### 2. Code and Outputs (zip file)
