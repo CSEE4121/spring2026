@@ -168,7 +168,8 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">11</td>
-<td markdown="span">Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-9.pdf %}))</td>
+<td markdown="span">Security and Privacy ([Slides]({{ site.baseurl }}{%link slides/lecture-9.pdf %}), [Video]
+(https://columbiauniversity.zoom.us/rec/play/f4etmJMHX-trUgItET2TOyTvXjzoLt26Fva4YSI-Z8e8NoEP-7QQpPV-3FDgOQXZ-5thJysfIGXceVQk.9YD2WixZ1-P44bmA)</td>
 <th></th>
 </tr>
 <tr>
