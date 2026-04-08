@@ -173,7 +173,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">12</td>
-<td markdown="span">Single node ML ([Slides]({{ site.baseurl }}{%link slides/lecture-10.pdf %}))</td>
+<td markdown="span">Single node ML ([Slides]({{ site.baseurl }}{%link slides/lecture-10.pdf %}), [Colab]({{ site.baseurl }}{%link assets/memory-compute.ipynb %}))</td>
 <th> Homework 4 out</th>
 </tr>
 <tr>
