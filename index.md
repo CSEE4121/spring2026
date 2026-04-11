@@ -173,7 +173,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">12</td>
-<td markdown="span">Single node ML ([Slides]({{ site.baseurl }}{%link slides/lecture-10.pdf %}), [Colab]({{ site.baseurl }}{%link assets/memory-compute.ipynb %}))</td>
+<td markdown="span">Single node ML ([Slides]({{ site.baseurl }}{%link slides/lecture-10.pdf %}), [Colab]({{ site.baseurl }}{%link assets/memory-compute.ipynb %}), [Video](https://columbiauniversity.zoom.us/rec/play/0JoRO1nBHmQN9TQ9_BtaV9696o-WJk6mRCcXpqdrklPXSqeaOfA6uEx3zlSW2QI_vV-e2YIPPYilQvmQ.40-gu4Pk1gnp_gif))</td>
 <th> Homework 4 out</th>
 </tr>
 <tr>
