@@ -178,7 +178,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">13</td>
-<td markdown="span">In-class workshop ([Colab]({{ site.baseurl }}{%link assets/sec_pri_sysml.ipynb %}))</td>
+<td markdown="span">In-class workshop ([Colab]({{ site.baseurl }}{%link assets/sec_pri_sysml.ipynb %}), [Slides]({{ site.baseurl }}{%link slides/lecture-11.pdf %}))</td>
 <th></th>
 </tr>
 <tr>
