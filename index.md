@@ -178,7 +178,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">13</td>
-<td markdown="span">In-class workshop ([Colab]({{ site.baseurl }}{%link assets/sec_pri_sysml.ipynb %}), [Slides]({{ site.baseurl }}{%link slides/lecture-11.pdf %}))</td>
+<td markdown="span">In-class workshop ([Colab]({{ site.baseurl }}{%link assets/sec_pri_sysml.ipynb %}), [Slides]({{ site.baseurl }}{%link slides/lecture-11.pdf %}), [Video](https://columbiauniversity.zoom.us/rec/play/750VB5xtJHnpnVHbJvWg4Ke69hKA6o9YZKMdcspgwnBqEx_L8AjAgB6FX-nhWmc9iirCubblCPyqhX6K.g-k0D_LCwBwwHy4C))</td>
 <th></th>
 </tr>
 <tr>
