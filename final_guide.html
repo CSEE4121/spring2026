@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSEE 4121 Final Exam Study Outline</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #000;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-top: 32px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    ul {
+      margin: 6px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 3px 0;
+    }
+
+    nav.toc {
+      margin-bottom: 24px;
+    }
+
+    nav.toc ol {
+      padding-left: 24px;
+    }
+
+    nav.toc a {
+      color: #000;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #999;
+      margin: 28px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 style="text-align:center; margin-top:0;">CSEE 4121 Final Exam Study Outline</h1>
+
+  <hr>
+
+  <nav class="toc" id="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#batch">Batch Processing at Scale</a></li>
+      <li><a href="#streaming">Stream Processing</a></li>
+      <li><a href="#security">Security Foundations</a></li>
+      <li><a href="#attacks">Attacks on Data Systems</a></li>
+      <li><a href="#authn-authz">Authentication and Authorization</a></li>
+      <li><a href="#equifax">Case Study: Equifax Breach</a></li>
+      <li><a href="#access-control">Access Control in Databases</a></li>
+      <li><a href="#anon">Anonymization and Privacy Models</a></li>
+      <li><a href="#ml">Systems for Machine Learning</a>
+        <ol>
+          <li><a href="#ml-single">Single Node</a></li>
+          <li><a href="#ml-dist">Distributed</a></li>
+          <li><a href="#ml-open">Open Challenges</a></li>
+        </ol>
+      </li>
+      <li><a href="#rag">RAG and Vector Databases</a></li>
+      <li><a href="#code">Code and Query Expectations</a></li>
+    </ol>
+  </nav>
+
+  <hr>
+  <p>Treat this guide as a summary and outline of the materials covered in the
+    final exam. Deeper understanding of recurring systems themes will benefit
+    performance. Case studies mentioned in class or otherwise generally help
+    internalize the concepts.</p>
+
+  <p>Students are expected to know basic SQL and Python to understand
+    interpret code used in scenario-based questions. Completing Homework 3 and the
+    in-class workshops should help.</p>
+
+  <hr>
+
+  <!-- ============== BATCH ============== -->
+  <h1 id="batch">1. Batch Processing at Scale</h1>
+
+  <h2>1.1 MapReduce</h2>
+  <ul>
+    <li>The programming model is deliberately less expressive than SQL. Users write only a map function and a reduce
+      function, and the framework handles parallelism, fault tolerance, and scale.</li>
+    <li>Execution proceeds in three stages. Mappers process input splits in parallel. The framework shuffles
+      intermediate output so that all values sharing a key end up at the same reducer. Reducers then process each key
+      independently.</li>
+    <li>Word count is the canonical example. When a single pass is not enough, jobs are chained, as when computing
+      global percentages requires a second job that knows the total.</li>
+    <li>MapReduce runs on top of HDFS in a master and worker architecture. The scheduler tries to place each map task on
+      a node that already holds its input block, since the network is the cluster bottleneck and moving compute to data
+      is cheaper than the reverse.</li>
+    <li>Failures are treated as routine. A worker that misses heartbeats has its tasks reassigned, and re-execution is
+      safe because map and reduce functions are deterministic. The master is a single point of failure but can be
+      recovered from an execution log.</li>
+    <li>Stragglers dominate latency because the job finishes only when the slowest task does. Speculative execution
+      launches a duplicate of any apparently slow task and takes whichever copy finishes first. This is also why the
+      99th percentile latency matters more than the average.</li>
+  </ul>
+
+  <h2>1.2 Spark</h2>
+  <ul>
+    <li>Spark exists because MapReduce writes intermediate results to disk between every stage. Iterative and
+      interactive workloads pay this cost over and over. Spark keeps the working set in cluster memory and amortizes the
+      load cost across many operations.</li>
+    <li>The core abstraction is the Resilient Distributed Dataset, an immutable partitioned collection formed from
+      stable storage or other RDDs. The vocabulary of operations is much richer than MapReduce, including map, filter,
+      groupBy, and join.</li>
+    <li>Transformations are lazy and only build a plan. Actions trigger execution. Laziness is what allows the optimizer
+      to look at a whole chain of operations and plan across them, which eager evaluation would prevent.</li>
+    <li>Fault tolerance comes from lineage rather than replication. Each RDD records the operations that produced it, so
+      a lost partition is recomputed rather than restored from a copy. Recovery is slower than fetching a replica but
+      normal execution carries no replication overhead.</li>
+    <li>The DAG scheduler groups operations into stages, pipelines what it can, and avoids shuffles when partitioning
+      permits.</li>
+    <li>DataFrames and Spark SQL sit on top of RDDs and present a relational view with named columns. Knowing the schema
+      enables more aggressive optimization than raw RDD code allows. UDFs serve as an escape hatch for custom row logic
+      at the cost of some optimization opportunities.</li>
+  </ul>
+
+  <!-- ============== STREAMING ============== -->
+  <h1 id="streaming">2. Stream Processing</h1>
+  <ul>
+    <li>Stream processing sits between OLTP and OLAP. It is not OLTP because updates are not in-place row writes, and it
+      is not OLAP because results cannot wait for a batch window. Typical use cases include surge pricing, fraud
+      detection, personalization, and real-time dashboards.</li>
+    <li>Spark Streaming treats the stream as a series of very small batch jobs, on the order of half a second each.
+      Because each micro-batch is a normal deterministic Spark job, it inherits all the fault tolerance of the batch
+      engine without separate machinery. Other systems such as Flink and Kinesis make different tradeoffs but follow the
+      same general pattern of reusing batch-like recovery for streaming workloads.</li>
+    <li>The programming model is the DStream, a discretized stream that behaves like a series of RDDs. Most operations
+      resemble their batch counterparts. The distinctive ones are windowed operations such as countByWindow and
+      reduceByKeyAndWindow.</li>
+    <li>Windowing is most efficient when computed incrementally. A sliding window of the last ten minutes, updated every
+      second, should add the new batch and subtract the expired batch rather than recompute from scratch.</li>
+  </ul>
+
+  <!-- ============== SECURITY FOUNDATIONS ============== -->
+  <h1 id="security">3. Security Foundations</h1>
+
+  <h2>3.1 Goals and Adversaries</h2>
+  <ul>
+    <li>Security is usually framed around four goals.
+      <ol>
+        <li>Confidentiality keeps data from leaking.</li>
+        <li>Integrity prevents tampering.</li>
+        <li>Availability keeps the system reachable.</li>
+        <li>Authenticity provides confidence about who sent a message or signed a document.</li>
+      </ol>
+    <li>Any security claim depends on an adversary. A defense that stops a casual outsider may be trivial for a
+      nation-state, and a system designed to protect against a cloud provider is very different from one designed to
+      protect against a competitor.</li>
+    <li>End-to-end security is a strict requirement. The weakest layer determines the overall posture. Encrypted disks
+      do not help if the password is phished, and HTTPS does not help if the server logs requests in plaintext.</li>
+  </ul>
+
+  <h2>3.2 Cryptographic Primitives</h2>
+  <ul>
+    <li>Symmetric encryption uses a shared key for both encrypt and decrypt. AES is the dominant algorithm and is fast
+      enough for bulk data, but the parties have to share the key first.</li>
+    <li>Asymmetric encryption uses a public and private key pair. RSA is the canonical example, based on the hardness of
+      factoring large integers. It is much slower than symmetric encryption, so in practice it is used to exchange a
+      symmetric key rather than to encrypt the data itself.</li>
+    <li>Hashing is a one-way function that produces a fixed-size digest, used as a building block for integrity checks
+      and signatures.</li>
+    <li>A digital signature is the hash of a message encrypted with the sender's private key. It provides integrity and
+      authenticity but not confidentiality, since the message itself is typically sent in the clear.</li>
+    <li>Two practical rules apply. Never invent your own crypto, and use vetted libraries. Even correct primitives in
+      the wrong configuration are insecure, which is where most real failures come from.</li>
+  </ul>
+
+  <h2>3.3 Compliance</h2>
+  <ul>
+    <li>Compliance and security are not the same thing. A system can pass a HIPAA or GDPR audit and still be trivial to
+      breach, and a well-engineered system can fail an audit on paperwork grounds. Both matter for different reasons.
+    </li>
+    <li>The major frameworks are:
+      <ul>
+        <li>HIPAA for healthcare data</li>
+        <li>GDPR for EU residents</li>
+        <li>PCI for payment cards</li>
+        <li>FERPA for student records</li>
+      </ul>
+    </li>
+    <li>
+      The principles that recur across them are worth following on engineering merit alone. These
+      include encrypting personal data at rest and in transit, keeping immutable audit logs, restricting access on a
+      need-to-know basis, supporting deletion requests, and respecting data residency rules.
+    </li>
+  </ul>
+
+  <!-- ============== ATTACKS ============== -->
+  <h1 id="attacks">4. Attacks on Data Systems</h1>
+
+  <h2>4.1 Injection</h2>
+  <ul>
+    <li>Injection attacks happen whenever untrusted input is interpreted as code rather than data. SQL injection is the
+      canonical case. The application builds a query by string concatenation, and a value such as
+      <code>' OR 1=1 --</code> turns an authentication query into one that returns every user. The same trick scales to
+      exfiltration with UNION, modification with UPDATE, and destruction with DROP TABLE.
+    </li>
+    <li>The structural fix is parameterized queries. The query template and its parameters are sent to the database
+      separately, and parameters are bound as data that is never parsed as SQL. Input validation, least-privilege
+      accounts, and web application firewalls add depth but do not substitute for the structural fix.</li>
+    <li>The pattern generalizes. NoSQL injection, command injection, log injection, and cross-site scripting are all
+      variations on mixing untrusted input with code at an interpreter boundary.</li>
+    <li>Remote code execution is a related attack where the attacker succeeds in executing their code on the server
+      albeit not through user input necessarily. Buffer overflows are a common mode.</li>
+  </ul>
+
+  <h2>4.2 Credentials, Phishing, and Denial of Service</h2>
+  <ul>
+    <li>Credential attacks exploit human behavior. Credential stuffing relies on password reuse across services. Brute
+      force and dictionary attacks try many guesses, and they are slowed by rate limiting, lockouts, and CAPTCHAs.
+      Multi-factor authentication is the real defense, since a stolen password becomes insufficient on its own.</li>
+    <li>Phishing sidesteps technical controls by attacking the human directly. Spear phishing uses personal context to
+      be more convincing and is the entry point for most major breaches. The most effective defense is hardware-backed
+      MFA, which verifies the domain and so resists fake login pages in a way that SMS or TOTP codes do not.</li>
+    <li>Denial of service comes in three flavors. Volumetric attacks saturate bandwidth, protocol attacks exhaust
+      resources such as the TCP connection table through SYN floods, and application-layer attacks send individually
+      plausible but expensive requests.</li>
+    <li>Distributed denial of service uses botnets, often built from compromised IoT
+      devices, and is harder to defend against because the traffic comes from everywhere. The Mirai botnet that brought
+      down Dyn in 2016 is the textbook example. Mitigations include CDNs that absorb traffic at the edge, traffic
+      scrubbing services, rate limiting per source, and auto-scaling, though the last can become an expensive contest.
+    </li>
+  </ul>
+
+  <!-- ============== AUTHN / AUTHZ ============== -->
+  <h1 id="authn-authz">5. Authentication and Authorization</h1>
+  <ul>
+    <li>Authentication asks who you are. Authorization asks what you are allowed to do. The two are independent, and
+      many breaches exploit the gap between them. A common failure is an authenticated user with too many permissions,
+      and the inverse failure is an unauthenticated user reaching a resource that should have required auth, as with a
+      public S3 bucket.</li>
+    <li>Authentication is described through three factors. Something you know is the weakest, since passwords are
+      guessed, phished, and reused. Something you have, such as a hardware key, is stronger because it requires physical
+      access. Something you are, meaning biometrics, is convenient but cannot be changed if compromised.</li>
+    <li>Multi-factor
+      authentication combines two or more of these and blocks the great majority of automated credential attacks. Among
+      MFA options, hardware keys and passkeys are stronger than SMS or TOTP, since the latter can still be phished by a
+      convincing fake login page.</li>
+    <li>Passwords should never be stored in plaintext. Storing a bare hash is insufficient because rainbow tables let
+      attackers reverse common passwords. The correct pattern is a salted hash computed by a deliberately slow function
+      such as bcrypt, scrypt, or argon2. A login that takes a quarter of a second is imperceptible to the user but
+      devastating to a brute-force attacker.</li>
+    <li>Sessions are managed in two main styles. Session cookies keep state on the server and are easy to revoke. JWTs
+      are signed self-contained tokens that scale well in distributed systems but are hard to revoke before they expire.
+    </li>
+    <li>API keys are a programmatic variant and require their own hygiene, including avoiding source-control commits,
+      scoping to least privilege, and rotating periodically.</li>
+    <li>Single sign-on routes authentication through a central identity provider, simplifying onboarding, offboarding,
+      and uniform MFA enforcement.</li>
+    <li>OAuth 2.0 enables delegated authorization, letting a third-party application act on a
+      user's behalf within a scoped, revocable token rather than receiving the user's password.</li>
+    <li>Service-to-service authentication uses dedicated service accounts, cloud IAM roles that cloud workloads inherit
+      automatically, and mutual TLS in zero-trust architectures. The recurring failure mode is hardcoded credentials in
+      scripts or config files.</li>
+  </ul>
+
+  <!-- ============== EQUIFAX ============== -->
+  <h1 id="equifax">6. The Equifax Breach</h1>
+  <ul>
+    <li>Equifax is one of three major US credit bureaus. It held financial data on roughly 800 million people. The 2017
+      breach exposed personal data of about 147 million Americans, including Social Security numbers, birth dates,
+      addresses, driver's license numbers, and credit cards.</li>
+    <li>The entry point was an Apache Struts vulnerability. A patch was available the same day it was disclosed in March
+      2017. Internal teams were told to apply it, and a vulnerability scan a few days later reported no issues. The
+      attackers exploited the still-unpatched system in May, then spent 76 days inside the network exfiltrating data
+      before unusual traffic was noticed at the end of July. Public disclosure followed in September.</li>
+    <li>Six layered failures combined to make the breach possible. The Struts patch was not applied promptly. The
+      vulnerability scan failed to cover the affected system. An internal traffic-inspection tool had an expired SSL
+      certificate for nineteen months and so could not see the exfiltration. The network was flat, with no segmentation
+      to limit lateral movement. PII was stored unencrypted at rest. Database credentials were kept in plaintext config
+      files, which let the attackers jump from the initial compromised host to
+      the databases.</li>
+    <li>Each one of these failures is common on its own.
+      The breach was so severe because every layer that should have caught it
+      was simultaneously broken, revealing systematic neglect. Defense in depth
+      would have worked if the layers actually worked.</li>
+  </ul>
+
+  <!-- ============== ACCESS CONTROL ============== -->
+  <h1 id="access-control">7. Access Control in Databases</h1>
+  <ul>
+    <li>Least privilege is the organizing principle. Every user and process should have only the permissions needed,
+      since the blast radius of a breach equals whatever the compromised account could touch. The principle is harder to
+      follow than to state because of convenience pressure, permission creep, and a lack of regular reviews.</li>
+    <li>Role-based access control (RBAC) introduces a layer of indirection between users and permissions. Permissions
+      are
+      granted to named roles such as analyst, engineer, or admin, and users are assigned to roles. Onboarding,
+      offboarding, and policy changes all happen at the role level, and the system is straightforward to audit.</li>
+    <li>Attribute-based access control (ABAC) instead writes policies that depend on attributes of the user, the
+      resource, and
+      the environment. A typical policy might allow finance employees to read confidential records only from the
+      corporate network during business hours.</li>
+    <li>ABAC is more expressive than RBAC but harder to audit, so most real
+      systems are hybrids that use RBAC for the common case and ABAC for context-sensitive exceptions.</li>
+    <li>Databases offer several enforcement mechanisms at different granularities. Views restrict which columns a user
+      can see. Row-level security restricts which rows are visible within the same table, useful for multi-tenant or
+      regional access. Column-level encryption stores sensitive values as ciphertext, providing defense in depth at the
+      cost of harder querying and key management. Dynamic data masking transforms displayed values based on the viewer
+      rather than encrypting the underlying storage.</li>
+    <li>Real-world failures are usually human. Shared service accounts erase accountability, permissions accumulate
+      without review, and overly strict controls produce shadow IT in which analysts move data to personal spreadsheets.
+      The right balance is regular access reviews, automated provisioning tied to HR systems, and audit logging, with
+      cultural commitment to least privilege rather than additional layers of technical enforcement.</li>
+  </ul>
+
+  <!-- ============== ANONYMIZATION ============== -->
+  <h1 id="anon">8. Anonymization and Privacy Models</h1>
+  <ul>
+    <li>Removing direct identifiers such as names and Social Security numbers does not anonymize a dataset.
+      Quasi-identifiers, the fields that do not identify on their own but combine into fingerprints, do most of the
+      identifying work. Sweeney's 1997 result showed that about 87 percent of Americans can be uniquely identified by
+      ZIP code, date of birth, and gender. She demonstrated this by linking an anonymized Massachusetts medical dataset
+      against voter rolls and identifying the governor's records.</li>
+    <li>Anonymization techniques include suppression of fields, generalization to broader categories, pseudonymization,
+      masking, and perturbation. All of them trade utility for privacy.</li>
+    <li>The Netflix Prize illustrated how easy these techniques are to defeat. Netflix released ratings with usernames
+      removed, IDs randomized, and some values perturbed. Researchers cross-referenced the dataset with public IMDb
+      ratings and identified the vast majority of users from as few as six rated movies.</li>
+    <li>Sparsity kills anonymity. In high-dimensional data almost every person is unique, and uniqueness combined with
+      auxiliary information can lead to identification. </li>
+    <li>Released data cannot be unreleased.</li>
+    <li>Some formal models attempt to put guarantees underneath these intuitions, and each is broken by the next attack.
+      <ul>
+        <li>K-anonymity requires each record to be indistinguishable from at
+          least k-1 others on quasi-identifiers. But it is defeated by the homogeneity
+          attack, in which all matching records share the same sensitive
+          value.</li>
+        <li>L-diversity requires each group to contain at least l distinct
+          sensitive values. But it is defeated by distribution skew.</li>
+        <li>T-closeness requires each group's sensitive distribution to stay
+          close to the overall distribution. But it requires heavy generalization
+          that damages utility.</li>
+      </ul>
+    <li>
+      All three offer syntactic guarantees on the structure of the released
+      data. Successive constraints and tradeoffs motivate a more systematic
+      approach, like differential privacy.</li>
+  </ul>
+
+
+  <h1 id="anon">9. Systems for Machine Learning</h1>
+  <h2 id="ml-single">9.1 Single Node</h2>
+  <h3>9.1.1 Landscape</h3>
+  <ul>
+    <li>Many ML techniques used today existed by the 1990s. The current era began when models, data, and hardware all
+      crossed thresholds of scale. All three had to come together.</li>
+    <li>The transformer architecture is worth singling out because attention is parallelizable in a way that recurrent
+      networks are not, which made it a good fit for modern GPUs.</li>
+    <li>Traditional ML still matters. Tree-based methods such as XGBoost dominate tabular problems and run comfortably
+      on CPUs in seconds. One needs to consider multiple approaches to solving an ML problem before deciding on, e.g.,
+      neural networks.</li>
+  </ul>
+  <h3>9.1.2 Hardware</h3>
+  <ul>
+    <li>CPUs and GPUs have different strengths. CPUs handle branching and irregular workloads well and are correct for
+      many ML tasks. GPUs have thousands of cores that execute in lockstep, which suits the regular matrix operations
+      underlying deep learning.</li>
+    <li>GPU memory uses a high-bandwidth design that delivers an order of magnitude more bandwidth than standard DRAM
+      but at much lower capacity.</li>
+    <li>But software tools, libraries, and install base are equally as
+      important in a competitive market. Nvidia's dominance in ML hardware comes
+      as much from the CUDA software ecosystem as from the chips
+      themselves.</li>
+    <li>Memory is the binding constraint more often than compute. Model memory equals parameters times bytes per
+      parameter, and training adds roughly a factor of four for gradients and optimizer state. Activation memory scales
+      with batch size, sequence length, and depth, and is often the actual cause of out-of-memory errors.</li>
+    <li>The toolbox for managing memory includes mixed precision (almost a free lunch), gradient checkpointing (compute
+      for memory), quantization (especially valuable for inference), and tuning batch size to the largest value that
+      fits.</li>
+    <li>Data loading can also become a bottleneck and waste GPU cycles. If any upstream stage of the data pipeline is
+      slower than the
+      GPU's consumption rate, the GPU sits idle. Low utilization is almost always a data-loading or batch-size problem
+      rather than a model problem.</li>
+  </ul>
+  <h3>9.1.3 Training vs. Inference</h3>
+  <ul>
+    <li>Training and inference have different bottlenecks. Training is compute-bound, since large batches keep the
+      matmul cores busy. Inference, when generating one token at a time, is memory-bound, since the entire model must be
+      loaded from memory, and the cores spend a lot of their time waiting.</li>
+    <li>The KV cache turns the inference problem from being compute bound to
+      memory bound. It stores keys and values from earlier tokens
+      so that generating the next token does not require recomputing them, but it grows with sequence length and number
+      of concurrent users.</li>
+    <li>At scale, the KV cache can rival the model weights in memory footprint. Managing it well largely
+      determines how many users a server can serve at once.</li>
+  </ul>
+  <h2 id="ml-dist">9.2 Distributed ML</h2>
+  <ul>
+    <li>Once a model or dataset outgrows a single GPU, work has to be spread
+      across multiple servers. Some standard distributed systems challenges and
+      solution come into play.</li>
+  </ul>
+  <h3>9.2.1 Training</h3>
+  <ul>
+    <li>Data parallelism is the simpler strategy. Each worker holds a complete model replica, the batch is split across
+      workers, and gradients are combined so that every replica applies the same update.</li>
+    <li>The simplest implementation uses a parameter server that holds canonical weights and aggregates gradients
+      centrally, but the parameter server becomes a bottleneck as the number of workers grows.</li>
+    <li>AllReduce is the decentralized alternative in which every worker ends up with the aggregated result. Naive
+      all-to-all communication scales no better than the parameter server, but Ring AllReduce passes parameter slices
+      around a logical ring in two phases and reduces total communication to a linear function of the number of workers.
+      It has become the de facto standard.</li>
+    <li>Model parallelism handles the case where the model itself does not fit on a single GPU, by partitioning the
+      model across devices and passing intermediate activations between them. The naive version leaves most GPUs idle
+      most of the time.</li>
+    <li>Pipeline model parallelism splits each batch into smaller micro-batches and pipelines them through the stages,
+      so that all GPUs are doing useful work in steady state.</li>
+    <li>The largest training runs combine data and model parallelism, often layering three or four parallelism
+      strategies together. A model may be sharded across different GPUs, and
+      there maybe multiple copies of the sharded model scheme training on
+      subsets of data in parallel. Each axis of parallelism has its own
+      communication bottleneck.</li>
+  </ul>
+  <h3>9.2.2 Inference</h3>
+  <ul>
+    <li>Most new AI infrastructure being built today is inference-focused
+      rather than training-focused.</li>
+    <li>Inference used to be a much simpler problem than training. Reasoning
+      models and agents can turn one logical query into many sub-inferences,
+      potentially across multiple models.</li>
+    <li>Modern serving systems must pack many
+      models onto shared GPUs, and share memory across requests where possible.
+      The target is to minimize cost per inference and cost per token while
+      meeting latency and accuracy requirements. Memory sharing across queries
+      and minimizing waste, e.g. from fragmentation, is a major theme.
+
+  </ul>
+  <h2 id="ml-open">9.3 Open Challenges</h2>
+  <h3>9.3.1 Testing and Debugging</h3>
+  <ul>
+    <li>Testing deep learning models in safety-critical settings is an unsolved problem. A held-out accuracy score does
+      not guarantee coverage of the corner cases that cause real failures, and labeled data is expensive.</li>
+    <li>Adversarial testing finds inputs whose imperceptible perturbations cause dramatic misclassification but is
+      criticized as unrealistic. Approaches like DeepXplore frame testing as an optimization problem, generating
+      realistic inputs that maximize neuron coverage and finding cases where multiple models disagree.</li>
+  </ul>
+  <h3>9.3.2 Versioning and Rollback</h3>
+  <ul>
+    <li>Version control and rollback are far behind their software counterparts. A model's behavior depends on its code,
+      training data, features, hyperparameters, and random seeds, so small changes anywhere can shift accuracy
+      meaningfully.</li>
+    <li>The problem is worse for foundation models, since fine-tuned derivatives all inherit any bug in the base model,
+      and patching requires re-fine-tuning every descendant. There is no widely accepted tool for tracking these
+      lineages.</li>
+  </ul>
+  <h3>9.3.3 Heterogeneous Deployment</h3>
+  <ul>
+    <li>Heterogeneous deployment to edge devices turns one model into a fleet of effectively different models.
+      Quantization differences, compression pipelines, and hardware variation cause both accuracy and latency to drift
+      across devices, on top of the additional constraint of power consumption.</li>
+  </ul>
+  <h3>9.3.4 Privacy</h3>
+  <ul>
+    <li>Models leak information about their training data. The earlier belief that aggregation preserves privacy turns
+      out to be wrong in every model class examined. Generative models autocomplete training data, recommender models
+      can be inverted from auxiliary information, and classifiers are vulnerable to membership inference attacks.</li>
+    <li>Differential privacy protects users at the source. The model does not
+      even process protected sensitive information. Systematic, guaranteed noise
+      is used such that an observer cannot tell whether any particular
+      individual's data was included.</li>
+    <li>This is achieved by adding calibrated noise so that any single
+      individual's presence has bounded effect on the output. The cost is some
+      loss of accuracy, but the guarantee composes well across repeated queries
+      and does not keep getting broken by the next attack.</li>
+  </ul>
+
+
+  <!-- ============== RAG ============== -->
+  <h1 id="rag">10. RAG and Vector Databases</h1>
+  <ul>
+    <li>Language models know only what was in their training data. For
+      applications that depend on private or rapidly changing information,
+      retraining is impractical and the context window is too small to hold
+      everything relevant. Retrieval-augmented generation handles this by
+      retrieving the most relevant chunks from an external store at query time and
+      prepending them to the prompt.</li>
+    <li>The retrieval store is a vector
+      database. Documents are chunked and passed through an embedding model that
+      produces fixed-dimensional vectors whose geometry encodes semantic meaning,
+      so that related texts map to nearby vectors. Queries are embedded into the
+      same space, and the database returns the top-k chunks closest to the query.
+      Approximate nearest-neighbor search is the norm because exact search does
+      not scale.</li>
+    <li>Vector indices come in two main families. Clustering
+      indices partition the space using something like k-means and search only the
+      clusters near the query.
+    </li>
+    <li>Graph indices such as HNSW build a navigable graph and use
+      greedy traversal toward the query, providing state-of-the-art accuracy and
+      speed at the cost of higher memory and build complexity.</li>
+    <li>Realistic
+      indices contain billions of vectors and exceed single-server memory. On-disk
+      indices keep most of the data on disk and cache the hot parts, but disk
+      bandwidth becomes the new ceiling and the mismatch between disk block size
+      and graph node size wastes bandwidth on every read. Access is heavily skewed
+      in practice, which makes caching effective. Open problems include efficient
+      updates and deletes, smarter caching policies, and partitioning across
+      servers.</li>
+  </ul>
+
+  <hr>
+
+  <i>Good luck with the exam!</i>
+
+</body>
+
+</html>

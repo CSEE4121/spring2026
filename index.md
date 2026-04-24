@@ -75,7 +75,7 @@ Wednesdays 04:10 PM – 06:40 PM
 
 ## Exams
 Midterm: March 4th, 2026, 4:10 PM - 6:40 PM [Study guide]({{ site.baseurl }}{%link midterm_guide.md %})<br />
-Final: April 29th, 2026, 4:10 PM - 6:40 PM
+Final: April 29th, 2026, 4:10 PM - 6:40 PM [Study guide]({{ site.baseurl }}{%link final_guide.html %})
 
 ## Grade Breakdown
 5% Homework 1 (Programming - SQL) <br />
