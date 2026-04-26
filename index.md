@@ -183,7 +183,7 @@ No textbook. Slides and assignments to be uploaded here.
 </tr>
 <tr>
 <td markdown="span">14</td>
-<td markdown="span">Distributed ML and RAG ([Slides]({{ site.baseurl }}{%link slides/lecture-12.pdf %}), [Colab]({{ site.baseurl }}{%link assets/rag.ipynb %}))</td>
+<td markdown="span">Distributed ML and RAG ([Slides]({{ site.baseurl }}{%link slides/lecture-12.pdf %}), [Colab]({{ site.baseurl }}{%link assets/rag.ipynb %}), [Video](https://columbiauniversity.zoom.us/rec/share/5aZatqZ-tdEQp_IZrjzOfQE7UZA5qnP_R0i5pBJmwrCcpjtwk7ZgFj__n4Co-EM6.uH69VXDHhxe25hFq))</td>
 <th> Homework 3 due</th>
 </tr>
 <tr>
